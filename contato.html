@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Formulário com Validação</title>
+<link rel="stylesheet" href="css/form.css">
+</head>
+<body>
+
+<h2>Formulário com Validação</h2>
+<form id="myForm" onsubmit="return validateForm()">
+  <label for="nome">Nome:</label><br>
+  <input type="text" id="nome" name="nome"><br>
+  <span id="nomeError" class="error"></span><br>
+
+  <label for="dataNascimento">Data de Nascimento:</label><br>
+  <input type="text" id="dataNascimento" name="dataNascimento"><br>
+  <span id="dataNascimentoError" class="error"></span><br>
+
+  <label for="email">Email:</label><br>
+  <input type="text" id="email" name="email"><br>
+  <span id="emailError" class="error"></span><br>
+
+  <label for="rg">RG:</label><br>
+  <input type="text" id="rg" name="rg"><br>
+  <span id="rgError" class="error"></span><br>
+
+  <label for="areaAtuacao">Área de Atuação:</label><br>
+  <select id="areaAtuacao" name="areaAtuacao">
+    <option value="">Selecione</option>
+    <option value="humanas">Humanas</option>
+    <option value="exatas">Exatas</option>
+    <option value="outra">Outra área</option>
+  </select><br><br>
+
+  <input type="submit" value="Enviar">
+</form>
+
+<script>
+function validateForm() {
+  var nome = document.getElementById("nome").value;
+  var dataNascimento = document.getElementById("dataNascimento").value;
+  var email = document.getElementById("email").value;
+  var rg = document.getElementById("rg").value;
+  var areaAtuacao = document.getElementById("areaAtuacao").value;
+
+
+
+  var isValid = true;
+   
+  var nomeRegex = /^[a-zA-Z\s]*$/;
+  if (!nomeRegex.test(nome)) {
+    alert ("Nome inválido");
+    return false;
+  } 
+   
+  var dataNascimentoRegex = /^\d{2}\/\d{2}\/\d{2}$/;
+  if (!dataNascimentoRegex.test(dataNascimento)) {
+    alert("Data de nascimento inválida, dd/mm/aa");
+    return false;
+  } 
+  
+  var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(email)) {
+    alert( "Email inválido @gmail.com");
+    return false;
+  } 
+
+  function isrgValid(rg){
+    const rgRegex= new RegExp(
+       //xx.xxx.xxx.x
+       /^\d{2}\.\d{3}\.\d{3}-\d{1}$/
+    )
+  };
+  if (!rgRegex.test(rg)) {
+   alert("RG inválido xx.xxx.xxx.x");
+   return true;
+  } return false;
+
+  if (areaAtuacao === "") {
+    alert("Por favor, selecione a área de atuação");
+    isValid = false;
+  }
+
+  return isValid;
+}
+</script>
+
+</body>
+</html>
